@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>📝 My Blog</h1>
+                <p>Share your thoughts with the world</p>
+            </div>
+            <button id="statsToggle" class="btn-icon" title="Show statistics">📊</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar: Create/Edit Blog Form -->
+        <aside class="sidebar">
+            <div class="form-container">
+                <h2 id="formTitle">Create New Blog Post</h2>
+                
+                <form id="blogForm">
+                    <div class="form-group">
+                        <label for="author">Author Name</label>
+                        <input 
+                            type="text" 
+                            id="author" 
+                            placeholder="Your name"
+                            class="form-input"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Blog Title</label>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            placeholder="Enter blog title"
+                            class="form-input"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" class="form-input" required>
+                            <option value="">Select a category</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Food">Food</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Blog Content</label>
+                        <textarea 
+                            id="content" 
+                            placeholder="Write your blog content here... (supports Markdown)"
+                            class="form-input"
+                            rows="8"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-block">📝 Publish Post</button>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary btn-block" style="display: none;">Cancel Edit</button>
+                    </div>
+                </form>
+
+                <div class="form-info">
+                    <p>💡 <strong>Tips:</strong></p>
+                    <ul>
+                        <li>Give your post a catchy title</li>
+                        <li>Select an appropriate category</li>
+                        <li>Write engaging content</li>
+                        <li>Your post is auto-saved</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content: Blog Feed -->
+        <main class="main-content">
+            <!-- Filter and Sort Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="🔍 Search blogs..."
+                            class="filter-input"
+                        >
+                    </div>
+
+                    <select id="categoryFilter" class="filter-input">
+                        <option value="">All Categories</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Food">Food</option>
+                        <option value="Health">Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Business">Business</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <select id="sortBy" class="filter-input">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="titleAZ">Title (A-Z)</option>
+                        <option value="titleZA">Title (Z-A)</option>
+                    </select>
+                </div>
+
+                <div class="view-options">
+                    <button id="viewGrid" class="view-btn active" title="Grid view">⊞</button>
+                    <button id="viewList" class="view-btn" title="List view">≡</button>
+                </div>
+            </div>
+
+            <!-- Stats Panel (Hidden by default) -->
+            <div id="statsPanel" class="stats-panel" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-label">Total Posts</span>
+                    <span class="stat-value" id="statTotal">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Categories</span>
+                    <span class="stat-value" id="statCategories">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Words</span>
+                    <span class="stat-value" id="statWords">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Characters</span>
+                    <span class="stat-value" id="statCharacters">0</span>
+                </div>
+            </div>
+
+            <!-- Blog Posts Grid/List -->
+            <div id="blogFeed" class="blog-feed grid-view">
+                <div class="empty-state">
+                    <p>📭 No blog posts yet</p>
+                    <p>Start by creating your first post!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+        <button id="clearAllBtn" class="btn btn-danger" title="Delete all posts">🗑️ Clear All</button>
+        <button id="exportBtn" class="btn btn-info" title="Export all posts">⬇️ Export</button>
+        <button id="importBtn" class="btn btn-info" title="Import posts">⬆️ Import</button>
+        <button id="scrollTopBtn" class="btn btn-primary" title="Scroll to top" style="display: none;">↑ Top</button>
+    </div>
+
+    <!-- Blog Post Modal (for full view) -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePostModal()">&times;</button>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal Backdrop -->
+    <div class="modal-backdrop" id="modalBackdrop" onclick="closePostModal()"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
