@@ -14,8 +14,7 @@
                 <h1>📝 My Blog</h1>
                 <p>Share your thoughts with the world</p>
             </div>
-            <button id="statsToggle" class="btn-icon" title="Show statistics">📊</button>
-        </div>
+            </div>
     </header>
 
     <div class="container">
@@ -104,8 +103,8 @@
                             placeholder="🔍 Search blogs..."
                             class="filter-input"
                         >
-                    </div>
 
+                    </div>
                     <select id="categoryFilter" class="filter-input">
                         <option value="">All Categories</option>
                         <option value="Technology">Technology</option>
@@ -126,13 +125,6 @@
                         <option value="titleZA">Title (Z-A)</option>
                     </select>
                 </div>
-
-                <div class="view-options">
-                    <button id="viewGrid" class="view-btn active" title="Grid view">⊞</button>
-                    <button id="viewList" class="view-btn" title="List view">≡</button>
-                </div>
-            </div>
-
             <!-- Stats Panel (Hidden by default) -->
             <div id="statsPanel" class="stats-panel" style="display: none;">
                 <div class="stat-item">
@@ -170,21 +162,6 @@
         <button id="importBtn" class="btn btn-info" title="Import posts">⬆️ Import</button>
         <button id="scrollTopBtn" class="btn btn-primary" title="Scroll to top" style="display: none;">↑ Top</button>
     </div>
-
-    <!-- Blog Post Modal (for full view) -->
-    <div class="modal" id="postModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closePostModal()">&times;</button>
-            <div id="modalBody" class="modal-body"></div>
-        </div>
-    </div>
-
-    <!-- Modal Backdrop -->
-    <div class="modal-backdrop" id="modalBackdrop" onclick="closePostModal()"></div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
-
     <script src="script.js"></script>
 </body>
 </html>
